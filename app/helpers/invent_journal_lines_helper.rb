@@ -1,0 +1,2 @@
+module InventJournalLinesHelper
+end

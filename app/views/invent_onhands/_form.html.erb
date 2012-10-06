@@ -1,0 +1,41 @@
+<%= form_for(@invent_onhand) do |f| %>
+  <% if @invent_onhand.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invent_onhand.errors.count, "error") %> prohibited this invent_onhand from being saved:</h2>
+
+      <ul>
+      <% @invent_onhand.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :invent_item_id %><br />
+    <%= f.text_field :invent_item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :invent_location_id %><br />
+    <%= f.text_field :invent_location_id %>
+  </div>
+  <div class="field">
+    <%= f.label :ordered_qty %><br />
+    <%= f.text_field :ordered_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :on_order_qty %><br />
+    <%= f.text_field :on_order_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :physical_qty %><br />
+    <%= f.text_field :physical_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :posted_qty %><br />
+    <%= f.text_field :posted_qty %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

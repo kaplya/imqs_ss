@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Invent journal:</b>
+  <%= @invent_journal_line.invent_journal_id %>
+</p>
+
+<p>
+  <b>Journal number:</b>
+  <%= @invent_journal_line.journal_number %>
+</p>
+
+<p>
+  <b>Invent item:</b>
+  <%= @invent_journal_line.invent_item_id %>
+</p>
+
+<p>
+  <b>Qty:</b>
+  <%= @invent_journal_line.qty %>
+</p>
+
+
+<%= link_to 'Edit', edit_invent_journal_line_path(@invent_journal_line) %> |
+<%= link_to 'Back', invent_journal_lines_path %>

@@ -1,0 +1,33 @@
+<h1>Listing invent_onhands</h1>
+
+<table>
+  <tr>
+    <th>Invent item</th>
+    <th>Invent location</th>
+    <th>Ordered qty</th>
+    <th>On order qty</th>
+    <th>Physical qty</th>
+    <th>Posted qty</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @invent_onhands.each do |invent_onhand| %>
+  <tr>
+    <td><%= invent_onhand.invent_item_id %></td>
+    <td><%= invent_onhand.invent_location_id %></td>
+    <td><%= invent_onhand.ordered_qty %></td>
+    <td><%= invent_onhand.on_order_qty %></td>
+    <td><%= invent_onhand.physical_qty %></td>
+    <td><%= invent_onhand.posted_qty %></td>
+    <td><%= link_to 'Show', invent_onhand %></td>
+    <td><%= link_to 'Edit', edit_invent_onhand_path(invent_onhand) %></td>
+    <td><%= link_to 'Destroy', invent_onhand, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Invent onhand', new_invent_onhand_path %>

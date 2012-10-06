@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Invent item:</b>
+  <%= @invent_transaction.invent_item_id %>
+</p>
+
+<p>
+  <b>Invent location:</b>
+  <%= @invent_transaction.invent_location_id %>
+</p>
+
+<p>
+  <b>Status receipt:</b>
+  <%= @invent_transaction.status_receipt %>
+</p>
+
+<p>
+  <b>Status issue:</b>
+  <%= @invent_transaction.status_issue %>
+</p>
+
+<p>
+  <b>Qty:</b>
+  <%= @invent_transaction.qty %>
+</p>
+
+
+<%= link_to 'Edit', edit_invent_transaction_path(@invent_transaction) %> |
+<%= link_to 'Back', invent_transactions_path %>

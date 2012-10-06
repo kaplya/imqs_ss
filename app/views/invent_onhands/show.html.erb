@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Invent item:</b>
+  <%= @invent_onhand.invent_item_id %>
+</p>
+
+<p>
+  <b>Invent location:</b>
+  <%= @invent_onhand.invent_location_id %>
+</p>
+
+<p>
+  <b>Ordered qty:</b>
+  <%= @invent_onhand.ordered_qty %>
+</p>
+
+<p>
+  <b>On order qty:</b>
+  <%= @invent_onhand.on_order_qty %>
+</p>
+
+<p>
+  <b>Physical qty:</b>
+  <%= @invent_onhand.physical_qty %>
+</p>
+
+<p>
+  <b>Posted qty:</b>
+  <%= @invent_onhand.posted_qty %>
+</p>
+
+
+<%= link_to 'Edit', edit_invent_onhand_path(@invent_onhand) %> |
+<%= link_to 'Back', invent_onhands_path %>
