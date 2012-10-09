@@ -2,7 +2,8 @@ class InventJournalLinesController < ApplicationController
   # GET /invent_journal_lines
   # GET /invent_journal_lines.json
   def index
-    @invent_journal_lines = InventJournalLine.all
+    
+    @invent_journal_lines = InventJournalLine.where(:journal_id => params[:journal_id])
 
     respond_to do |format|
       format.html # index.html.erb
