@@ -1,4 +1,3 @@
-require 'invent_movement'
 class InventUpdate
 
   attr_accessor :movement

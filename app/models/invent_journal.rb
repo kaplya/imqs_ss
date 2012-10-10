@@ -4,6 +4,6 @@ class InventJournal < ActiveRecord::Base
   #set_inheritance_column :subtype
 
   def post
-  	
+  	AF::InventJournal.post self
   end
 end

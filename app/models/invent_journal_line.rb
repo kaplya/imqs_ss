@@ -8,4 +8,9 @@ class InventJournalLine < ActiveRecord::Base
   	mov = InventMovement.make origin_line: self
   	mov.transact
   end
+
+  def transact_changed_line
+  	mov = InventMovement.make origin_line: self
+  	mov.transact
+  end
 end
