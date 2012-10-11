@@ -28,8 +28,10 @@ class InventJournalLineTest < ActiveSupport::TestCase
 
   	@line.save
 
-  	trans_issue = InventTransaction.find_by_source_line @line, direction: :issue
-  	trans_receipt = InventTransaction.find_by_source_line @line, direction: :receipt
+    @line.sign = -1
+  	trans_issue = InventTransaction.find_by_source_line @line
+    @line.sign = 1
+  	trans_receipt = InventTransaction.find_by_source_line @line
 
     assert !trans_issue.nil?, "the issue transaction have not been found"
     assert !trans_receipt.nil?, "the receipt transaction have not been found"
@@ -51,8 +53,10 @@ class InventJournalLineTest < ActiveSupport::TestCase
 
     @line.save
 
-    trans_issue = InventTransaction.find_by_source_line @line, direction: :issue
-    trans_receipt = InventTransaction.find_by_source_line @line, direction: :receipt
+    @line.sign = -1
+    trans_issue = InventTransaction.find_by_source_line @line
+    @line.sign = 1
+    trans_receipt = InventTransaction.find_by_source_line @line
 
     assert trans_issue.status_issue == 1, "status issue should be 1 not #{trans_issue.status_issue}" 
     assert trans_issue.qty == -6.0, "qty should be -6.0 not #{trans_issue.qty}"
@@ -69,8 +73,10 @@ class InventJournalLineTest < ActiveSupport::TestCase
 
     @journal.post
 
-    trans_issue = InventTransaction.find_by_source_line @line, direction: :issue
-    trans_receipt = InventTransaction.find_by_source_line @line, direction: :receipt
+    @line.sign = -1
+    trans_issue = InventTransaction.find_by_source_line @line
+    @line.sign = 1
+    trans_receipt = InventTransaction.find_by_source_line @line
 
     assert !trans_issue.nil?, "the issue transaction have not been found"
     assert !trans_receipt.nil?, "the receipt transaction have not been found"

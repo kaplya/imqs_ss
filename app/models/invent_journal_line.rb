@@ -37,12 +37,7 @@ class InventJournalLine < ActiveRecord::Base # try to inherit from journal
   end
 
   def trans_qty
-    if self.journal.type = InventJournalTransfer then
-      return self.qty * @sign
-    else
-      return self.qty
-    end
-
+    return self.qty * @sign
   end
 
 end

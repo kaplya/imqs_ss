@@ -30,13 +30,13 @@ class InventTransaction < ActiveRecord::Base
   	onhand.plus_transaction(self)
   end
   
-  def self.find_by_source_line(source_line, opts = {})
-    if opts[:direction] == :receipt then
+  def self.find_by_source_line(source_line)
+    if source_line.trans_qty > 0 then
       trans = InventTransaction.where(
         status_issue: 0,
         source_id: source_line.id,
         source_type: source_line.class.name)
-    elsif opts[:direction] == :issue then
+    elsif source_line.trans_qty < 0 then
       trans = InventTransaction.where(
         status_receipt: 0,
         source_id: source_line.id,

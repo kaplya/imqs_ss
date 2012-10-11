@@ -20,7 +20,7 @@ class InventUpdateEstimated < InventUpdate
     trans.source_id = @source.id
     trans.source_type = @source.class.name
 
-    trans.location_id = @source.trans_location_id #wrong!
+    trans.location_id = @source.trans_location_id
     trans.item_id = @source.trans_item_id
     trans.qty = @source.trans_qty
 
@@ -42,20 +42,11 @@ class InventUpdatePosted < InventUpdate
 
   def transact
 
-    trans_issue = InventTransaction.find_by_source_line @source, direction: :issue
-    trans_receipt = InventTransaction.find_by_source_line @source, direction: :receipt
+    trans = InventTransaction.find_by_source_line @source
 
-    raise "Could not find any transactions for #{@source.type} id #{@source.id}" if trans_issue.nil? && trans_receipt.nil? 
-    
-    if !trans_issue.nil? then
-      trans_issue.status_issue = 3
-      trans_issue.save
-    end
+    trans.status_receipt = (trans.qty > 0 ? 3 : 0)
+    trans.status_issue = (trans.qty < 0 ? 3 : 0)
 
-    if !trans_receipt.nil? then
-      trans_receipt.status_receipt = 3
-      trans_receipt.save
-    end
-
+    trans.save
   end 
 end

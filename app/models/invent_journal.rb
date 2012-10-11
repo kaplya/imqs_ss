@@ -8,7 +8,9 @@ class InventJournal < ActiveRecord::Base
       
       raise "Inventory Journal #{self.number} is already posted!" if self.posted    
 
-      self.lines.each { |line| InventUpdatePosted.transact line }
+      self.lines.each do |line| 
+        self.transact_posted_line line
+      end
 
       self.posted = true
       self.save
@@ -18,6 +20,8 @@ class InventJournal < ActiveRecord::Base
   def trans_location qty
     return self.location_id
   end
+
+
 end
 
 class InventJournalTransfer < InventJournal
@@ -29,19 +33,23 @@ class InventJournalTransfer < InventJournal
     InventUpdateEstimated.transact line
   end
 
-  def trans_location_id
-    if @sign > 0 then
-      return self.to_location_id
-    elsif @sign < 0
-      return self.location_id
-    end
-  end
+
+  def transact_posted_line line
+    line.sign = -1
+    InventUpdatePosted.transact line
+    line.sign = 1
+    InventUpdatePosted.transact line
+  end  
 end
 
 
 class InventJournalCount < InventJournal
 
   def transact_created_line line
-  	InventUpdateEstimated.transact line, line.qty
+  	InventUpdateEstimated.transact line
+  end
+
+  def transact_posted_line line
+    InventUpdatePosted.transact line
   end
 end
