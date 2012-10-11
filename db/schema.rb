@@ -15,21 +15,21 @@ ActiveRecord::Schema.define(:version => 20121001184657) do
 
   create_table "invent_journal_lines", :force => true do |t|
     t.integer  "journal_id"
-    t.string   "journal_number"
     t.integer  "item_id"
-    t.decimal  "qty",            :default => 0.0, :null => false
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.decimal  "qty",        :default => 0.0, :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "invent_journals", :force => true do |t|
     t.string   "number"
     t.string   "description"
-    t.integer  "journal_type"
+    t.string   "type"
     t.integer  "location_id"
     t.integer  "to_location_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.boolean  "posted",         :default => false, :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "invent_onhands", :force => true do |t|

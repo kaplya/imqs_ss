@@ -1,16 +1,48 @@
-class InventJournalLine < ActiveRecord::Base
+class InventJournalLine < ActiveRecord::Base # try to inherit from journal
   attr_accessible :item_id, :journal_id, :journal_number, :qty
   belongs_to :journal, class_name: "InventJournal", foreign_key: "journal_id"
 
+
   after_create :transact_created_line
 
+  @sign = 1
+  attr_accessor :sign
+
   def transact_created_line
-  	mov = InventMovement.make origin_line: self
-  	mov.transact
+  	self.journal.transact_created_line self
   end
 
-  def transact_changed_line
-  	mov = InventMovement.make origin_line: self
-  	mov.transact
+  def location_id
+    self.journal.location_id
   end
+
+  def to_location_id
+    self.journal.to_location_id
+  end
+
+  def trans_location_id
+    if self.journal.type = InventJournalTransfer then
+      if (@sign > 0) then
+        return self.journal.to_location_id
+      elsif (@sign < 0) then
+        return self.journal.location_id
+      end
+    else
+      return self.journal.location_id
+    end
+  end
+
+  def trans_item_id
+    return self.item_id
+  end
+
+  def trans_qty
+    if self.journal.type = InventJournalTransfer then
+      return self.qty * @sign
+    else
+      return self.qty
+    end
+
+  end
+
 end

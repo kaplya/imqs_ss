@@ -5,8 +5,7 @@ require 'test_helper'
 class InventJournalLineTest < ActiveSupport::TestCase
 
   def build_line_12
-    @journal = InventJournal.create(
-      journal_type: 1, 
+    @journal = InventJournalTransfer.create(
       location_id: 8,
       to_location_id: 9,
       number: "transfer0023")

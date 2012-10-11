@@ -1,65 +1,61 @@
 class InventUpdate
 
-  attr_accessor :movement
-  @movement = nil
+  attr_accessor :source
+  @source = nil
 
-  def self.make (type)
-
-  end
 end
 
-class InventUpdateOrdered < InventUpdate
-  def self.make mov
+class InventUpdateEstimated < InventUpdate
 
-  	invent_update = InventUpdateOrdered.new
-    invent_update.setup_movement mov
+  def self.transact source
+    update = InventUpdateEstimated.new
+    update.source = source
 
-    return invent_update
-  end
-
-  def setup_movement mov
-    @movement = mov
+    update.transact   
   end
 
   def transact
-    trans = InventTransaction.new(
-      )
-    trans.location_id = @movement.to_location_id
-    trans.item_id = @movement.item_id
-    trans.qty = @movement.qty
-    trans.status_receipt = 1
-    trans.status_issue = 0
-    trans.source_id = @movement.source_id
-    trans.source_type = @movement.source_type
+    trans = InventTransaction.new
+
+    trans.source_id = @source.id
+    trans.source_type = @source.class.name
+
+    trans.location_id = @source.trans_location_id #wrong!
+    trans.item_id = @source.trans_item_id
+    trans.qty = @source.trans_qty
+
+    trans.status_receipt = (trans.qty > 0 ? 1 : 0)
+    trans.status_issue = (trans.qty < 0 ? 1 : 0)
 
     trans.save
   end
 end
 
-class InventUpdateOnOrder < InventUpdate
-  def self.make mov
+class InventUpdatePosted < InventUpdate
+    
+  def self.transact source
+    update = InventUpdatePosted.new
+    update.source = source
 
-    invent_update = InventUpdateOnOrder.new
-    invent_update.setup_movement mov
-
-    return invent_update
-  end
-
-  def setup_movement mov
-    @movement = mov
+    update.transact   
   end
 
   def transact
-    trans = InventTransaction.new(
-      )
-    trans.location_id = @movement.location_id
-    trans.item_id = @movement.item_id
-    trans.qty = @movement.qty * -1
-    trans.status_receipt = 0
-    trans.status_issue = 1
-    trans.source_id = @movement.source_id
-    trans.source_type = @movement.source_type
 
-    trans.save
-  end
+    trans_issue = InventTransaction.find_by_source_line @source, direction: :issue
+    trans_receipt = InventTransaction.find_by_source_line @source, direction: :receipt
+
+    raise "Could not find any transactions for #{@source.type} id #{@source.id}" if trans_issue.nil? && trans_receipt.nil? 
+    
+    if !trans_issue.nil? then
+      trans_issue.status_issue = 3
+      trans_issue.save
+    end
+
+    if !trans_receipt.nil? then
+      trans_receipt.status_receipt = 3
+      trans_receipt.save
+    end
+
+  end 
 end
