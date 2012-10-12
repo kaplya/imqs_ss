@@ -4,6 +4,7 @@ class CreateInventJournalLines < ActiveRecord::Migration
       t.integer :journal_id
       t.integer :item_id
       t.decimal :qty,      :default => 0,  :null => false
+      t.string :type
 
       t.timestamps
     end

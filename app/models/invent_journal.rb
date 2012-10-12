@@ -9,7 +9,7 @@ class InventJournal < ActiveRecord::Base
       raise "Inventory Journal #{self.number} is already posted!" if self.posted    
 
       self.lines.each do |line| 
-        self.transact_posted_line line
+        line.transact_posted_line 
       end
 
       self.posted = true
@@ -25,31 +25,12 @@ class InventJournal < ActiveRecord::Base
 end
 
 class InventJournalTransfer < InventJournal
+  has_many :lines, class_name: "InventJournalTransferLine", foreign_key: "journal_id"
 
-  def transact_created_line line
-    line.sign = -1
-  	InventUpdateEstimated.transact line
-    line.sign = 1
-    InventUpdateEstimated.transact line
-  end
-
-
-  def transact_posted_line line
-    line.sign = -1
-    InventUpdatePosted.transact line
-    line.sign = 1
-    InventUpdatePosted.transact line
-  end  
 end
 
 
 class InventJournalCount < InventJournal
-
-  def transact_created_line line
-  	InventUpdateEstimated.transact line
-  end
-
-  def transact_posted_line line
-    InventUpdatePosted.transact line
-  end
+  has_many :lines, class_name: "InventJournalCountLine", foreign_key: "journal_id"
+  
 end

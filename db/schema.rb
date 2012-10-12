@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20121001184657) do
     t.integer  "journal_id"
     t.integer  "item_id"
     t.decimal  "qty",        :default => 0.0, :null => false
+    t.string   "type"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
