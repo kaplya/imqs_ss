@@ -3,7 +3,8 @@
 require 'test_helper'
 
 class InventJournalLineTest < ActiveSupport::TestCase
-
+  fixtures :all
+    
   def build_line_12
     @journal = InventJournalTransfer.create(
       location_id: 8,
@@ -23,6 +24,8 @@ class InventJournalLineTest < ActiveSupport::TestCase
 
 
   test "transactions on line creation" do
+
+
 
   	build_line_12
 
@@ -45,6 +48,7 @@ class InventJournalLineTest < ActiveSupport::TestCase
 
   test "transactions on qty changing" do
 
+    
     build_line_12
 
     @line.save
@@ -59,14 +63,15 @@ class InventJournalLineTest < ActiveSupport::TestCase
     trans_receipt = InventTransaction.find_by_source_line @line
 
     assert trans_issue.status_issue == 1, "status issue should be 1 not #{trans_issue.status_issue}" 
-    assert trans_issue.qty == -6.0, "qty should be -6.0 not #{trans_issue.qty}"
+    assert trans_issue.qty == -6.0, "issue qty should be -6.0 not #{trans_issue.qty}"
 
     assert trans_receipt.status_receipt == 1, "status receipt should be 1 not #{trans_receipt.status_receipt}" 
-    assert trans_receipt.qty == 6.0, "qty should be 6.0 not #{trans_receipt.qty}"    
+    assert trans_receipt.qty == 6.0, "receipt qty should be 6.0 not #{trans_receipt.qty}"    
   end
 
   test "transactions on journal posting" do
-    
+
+        
     build_line_12
 
     @line.save

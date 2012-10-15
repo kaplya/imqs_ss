@@ -1,6 +1,7 @@
 class InventOnhand < ActiveRecord::Base
   attr_accessible :item_id, :location_id, :on_order_qty, :ordered_qty, :physical_qty, :posted_qty
-
+  validates :posted_qty, numericality: {greater_than_or_equal_to: 0}
+  validates :physical_qty, numericality: {greater_than_or_equal_to: 0}
 
   def plus_transaction(trans)
   	# if we add the transaction we pass +1
