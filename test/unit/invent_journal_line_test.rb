@@ -1,8 +1,12 @@
-#TODO think about helper to setup expected results and copmare them to the outcome we have
-#so that we won't have to do something like 'assert trans_issue.status_issue == 1'
 require 'test_helper'
 
 class InventJournalLineTest < ActiveSupport::TestCase
+
+  test "validations" do 
+    line = InventJournalTransferLine.new
+    assert !line.save, "should not save empty #{line.class.name}"
+
+  end
 
   def build_line_12
     @journal = InventJournalTransfer.create(
@@ -29,9 +33,9 @@ class InventJournalLineTest < ActiveSupport::TestCase
   	@line.save
 
     @line.sign = -1
-  	trans_issue = InventTransaction.find_by_source_line @line
+  	trans_issue = @line.invent_transactions[0]
     @line.sign = 1
-  	trans_receipt = InventTransaction.find_by_source_line @line
+  	trans_receipt = @line.invent_transactions[0]
 
     assert !trans_issue.nil?, "the issue transaction have not been found"
     assert !trans_receipt.nil?, "the receipt transaction have not been found"
@@ -54,9 +58,9 @@ class InventJournalLineTest < ActiveSupport::TestCase
     @line.save
 
     @line.sign = -1
-    trans_issue = InventTransaction.find_by_source_line @line
+    trans_issue = @line.invent_transactions[0]
     @line.sign = 1
-    trans_receipt = InventTransaction.find_by_source_line @line
+    trans_receipt = @line.invent_transactions[0]
 
     assert trans_issue.status_issue == 1, "status issue should be 1 not #{trans_issue.status_issue}" 
     assert trans_issue.qty == -6.0, "qty should be -6.0 not #{trans_issue.qty}"
@@ -74,9 +78,9 @@ class InventJournalLineTest < ActiveSupport::TestCase
     @journal.post
 
     @line.sign = -1
-    trans_issue = InventTransaction.find_by_source_line @line
+    trans_issue = @line.invent_transactions[0]
     @line.sign = 1
-    trans_receipt = InventTransaction.find_by_source_line @line
+    trans_receipt = @line.invent_transactions[0]
 
     assert !trans_issue.nil?, "the issue transaction have not been found"
     assert !trans_receipt.nil?, "the receipt transaction have not been found"

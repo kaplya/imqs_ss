@@ -15,20 +15,25 @@ class InventUpdateEstimated < InventUpdate
   end
 
   def transact
-    trans = InventTransaction.new
+    transes = @source.invent_transactions
 
-    trans.source_id = @source.id
-    trans.source_type = @source.class.name
+    if transes.nil? or (transes == []) then 
+      transes << InventTransaction.new
+    end
 
-    trans.location_id = @source.trans_location_id
-    trans.item_id = @source.trans_item_id
-    trans.qty = @source.trans_qty
+    transes.each do |trans|
+      @source.init_trans trans
+      set_statuses trans
+      trans.save
+    end
+    
+  end
 
+  def set_statuses trans
     trans.status_receipt = (trans.qty > 0 ? 1 : 0)
     trans.status_issue = (trans.qty < 0 ? 1 : 0)
-
-    trans.save
   end
+
 end
 
 class InventUpdatePosted < InventUpdate
@@ -41,12 +46,20 @@ class InventUpdatePosted < InventUpdate
   end
 
   def transact
+    transes = @source.invent_transactions
 
-    trans = InventTransaction.find_by_source_line @source
+    if transes.nil? or (transes == []) then 
+      transes << InventTransaction.new
+    end
 
+    transes.each do |trans|
+      set_statuses trans
+      trans.save
+    end
+  end 
+
+  def set_statuses trans
     trans.status_receipt = (trans.qty > 0 ? 3 : 0)
     trans.status_issue = (trans.qty < 0 ? 3 : 0)
-
-    trans.save
-  end 
+  end
 end

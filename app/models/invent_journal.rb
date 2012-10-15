@@ -9,7 +9,7 @@ class InventJournal < ActiveRecord::Base
       raise "Inventory Journal #{self.number} is already posted!" if self.posted    
 
       self.lines.each do |line| 
-        line.transact_posted_line 
+        line.transact_posted
       end
 
       self.posted = true
