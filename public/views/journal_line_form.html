@@ -1,0 +1,34 @@
+<table ng-controller="JournalLineFormCtrl" ico-form="l.mode">
+	<tbody>
+		<tr show-form>
+			<td>{{l.journal_id}}</td>
+			<td>{{l.journal_number}}</td>
+			<td>{{l.item_id}}</td>
+			<td>{{l.qty}}</td>
+			<td><a href edit-link>edit</a> <span></span><a href ng-click="destroy()">x</a></td>
+		</tr>
+		<tr edit-form>
+			<td colspan=4>
+				<form ng-submit="createOrUpdate()">
+					<div class="float">
+						<label for="item_id">item_id</label><br />
+						<input id="item_id" ng-model="l.item_id">
+					</div>
+					<div class="float">
+						<label for="qty">Qty</label><br />
+						<input id="qty" ng-model="l.qty">
+					</div>
+					<div>
+						<br />
+						<input type="submit">
+						<span>or</span>
+						<a href ng-click="cancel()" cancel-link>Cancel</a>
+					</div>
+				</form>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+

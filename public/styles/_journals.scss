@@ -1,0 +1,60 @@
+.journal {
+	border: 1px black solid;
+	margin: 2px 6px 2px 6px;
+	border-radius: 3px;
+	.new-form {
+		background-color: Gray;
+		border: 1px, black;
+		margin: 6px;
+	}
+}
+
+ul {
+	margin: 0;
+}
+
+.form {
+	background-color: Gray;
+	width: 700px;
+	margin: 6px;
+	padding: 3px;
+	overflow: hidden;
+}
+
+.float {
+	float: left;
+}
+
+.journals {
+	.journal {
+		padding-left: 6px;
+		color: Black;
+		font: {
+			size: 24px;
+		}
+		border: 1px black solid;
+		margin: 2px 6px 2px 6px;
+		border-radius: 3px;
+		.lines-link {
+			font-size: 16px;
+		}
+	}
+	.line {
+		padding-left: 12px;
+		font: {
+			size: 14px;
+		}
+	}
+}
+
+.lines {
+	/*border: 1px solid black;*/
+	overflow: hidden;
+	background-color: LightGray;
+	margin: 3px;
+	border-radius: 3px;
+}
+
+.line {
+	overflow: hidden;
+}
