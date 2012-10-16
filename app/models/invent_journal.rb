@@ -1,5 +1,5 @@
 class InventJournal < ActiveRecord::Base
-  attr_accessible :description, :location_id, :number, :to_location_id, :type, :posted
+  attr_accessible :description, :dimension_id, :number, :to_dimension_id, :type, :posted
   has_many :lines, class_name: "InventJournalLine", foreign_key: "journal_id"
   #set_inheritance_column :subtype
 

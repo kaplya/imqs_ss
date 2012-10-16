@@ -3,6 +3,20 @@ class InventUpdate
   attr_accessor :source
   @source = nil
 
+  def transact
+    transes = @source.invent_transactions
+
+    if transes == [] then 
+      transes << @source.init_trans(InventTransaction.new)
+    end
+
+    transes.each do |trans|
+      @source.init_trans trans
+      set_statuses trans
+      trans.save
+    end
+  end 
+
 end
 
 class InventUpdateEstimated < InventUpdate
@@ -12,21 +26,6 @@ class InventUpdateEstimated < InventUpdate
     update.source = source
 
     update.transact   
-  end
-
-  def transact
-    transes = @source.invent_transactions
-
-    if transes.nil? or (transes == []) then 
-      transes << InventTransaction.new
-    end
-
-    transes.each do |trans|
-      @source.init_trans trans
-      set_statuses trans
-      trans.save
-    end
-    
   end
 
   def set_statuses trans
@@ -44,19 +43,6 @@ class InventUpdatePosted < InventUpdate
 
     update.transact   
   end
-
-  def transact
-    transes = @source.invent_transactions
-
-    if transes.nil? or (transes == []) then 
-      transes << InventTransaction.new
-    end
-
-    transes.each do |trans|
-      set_statuses trans
-      trans.save
-    end
-  end 
 
   def set_statuses trans
     trans.status_receipt = (trans.qty > 0 ? 3 : 0)

@@ -1,11 +1,13 @@
 class InventJournalLine < ActiveRecord::Base 
-  attr_accessible :item_id, :journal_id, :journal_number, :qty
+  attr_accessible :item_id, :dimension_id, :to_dimension_id, :journal_id, :qty, :type
   belongs_to :journal, class_name: "InventJournal", foreign_key: "journal_id"
+  belongs_to :dimension, class_name: "InventDimension", foreign_key: "dimension_id"
+  belongs_to :to_dimension, class_name: "InventDimension", foreign_key: "to_dimension_id"
 
   validates :qty, numericality: true
   validates :item_id, presence: true
   validates :journal_id, presence: true
-
+  validates_presence_of :journal
 
   after_create :transact_estimated
   after_update :transact_estimated
@@ -14,13 +16,17 @@ class InventJournalLine < ActiveRecord::Base
   @sign = 1
   attr_accessor :sign
 
+
+
   def init_trans trans
     trans.source_id = self.id
     trans.source_type = self.class.name
 
-    trans.location_id = self.trans_location_id
+    trans.dimension_id = self.trans_dimension_id
     trans.item_id = self.trans_item_id
     trans.qty = self.trans_qty
+
+    return trans
   end
 
   def invent_transactions
@@ -44,16 +50,8 @@ class InventJournalLine < ActiveRecord::Base
     return transes
   end
 
-  def location_id
-    self.journal.location_id
-  end
-
-  def to_location_id
-    self.journal.to_location_id
-  end
-
-  def trans_location_id
-    self.journal.location_id
+  def trans_dimension_id
+    self.dimension.dimension_id
   end
 
   def trans_item_id
@@ -72,11 +70,11 @@ class InventJournalTransferLine < InventJournalLine
   validates :qty, numericality: {gteater_than: 0}
 
 
-  def trans_location_id
+  def trans_dimension_id
     if (@sign > 0) then
-      return self.journal.to_location_id
+      return self.to_dimension_id
     elsif (@sign < 0) then
-      return self.journal.location_id
+      return self.dimension_id
     end
   end
 

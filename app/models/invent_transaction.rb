@@ -1,5 +1,7 @@
 class InventTransaction < ActiveRecord::Base
-  attr_accessible :item_id, :location_id, :qty, :status_issue, :status_receipt, :source_id, :source_type
+  attr_accessible :item_id, :dimension_id, :qty, :status_issue, :status_receipt, :source_id, :source_type
+  
+  belongs_to :dimension, class_name: "InventDimension", foreign_key: "dimension_id"
 
   before_create :update_onhand_with_created_transaction
   before_destroy :update_onhand_with_deleted_transaction
@@ -7,7 +9,7 @@ class InventTransaction < ActiveRecord::Base
 
 
   def relative_onhand
-  	return InventOnhand.find_or_initialize_by_item_id_and_location_id(self.item_id, self.location_id)
+  	return InventOnhand.find_or_initialize_by_item_id_and_dimension_id(self.item_id, self.dimension_id)
   end
 
   def original

@@ -4,8 +4,8 @@ class CreateInventJournals < ActiveRecord::Migration
       t.string :number
       t.string :description
       t.string :type
-      t.integer :location_id
-      t.integer :to_location_id
+      t.integer :dimension_id
+      t.integer :to_dimension_id
       t.boolean :posted, default: false, null: false
 
       t.timestamps
