@@ -3,6 +3,8 @@ class InventJournalLine < ActiveRecord::Base
   belongs_to :journal, class_name: "InventJournal", foreign_key: "journal_id"
 
   validates :qty, numericality: true
+  validates :item_id, presence: true
+  validates :journal_id, presence: true
 
 
   after_create :transact_estimated
