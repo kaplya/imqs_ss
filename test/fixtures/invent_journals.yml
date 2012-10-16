@@ -1,2 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
+one:
+  id: 1
+  number: "number01"
+  dimension_id: 11
+  to_dimension_id: 12

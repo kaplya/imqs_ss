@@ -1,4 +1,3 @@
-require 'invent_update'
 class InventMovement
   
   attr_accessor :origin_line

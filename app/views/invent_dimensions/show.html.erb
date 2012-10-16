@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Location:</b>
+  <%= @invent_dimension.location_id %>
+</p>
+
+<p>
+  <b>Batch:</b>
+  <%= @invent_dimension.batch_id %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @invent_dimension.color_id %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%= @invent_dimension.size_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_invent_dimension_path(@invent_dimension) %> |
+<%= link_to 'Back', invent_dimensions_path %>

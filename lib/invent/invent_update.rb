@@ -1,66 +1,51 @@
-require 'invent_movement'
 class InventUpdate
 
-  attr_accessor :movement
-  @movement = nil
-
-  def self.make (type)
-
-  end
-end
-
-class InventUpdateOrdered < InventUpdate
-  def self.make mov
-
-  	invent_update = InventUpdateOrdered.new
-    invent_update.setup_movement mov
-
-    return invent_update
-  end
-
-  def setup_movement mov
-    @movement = mov
-  end
+  attr_accessor :source
+  @source = nil
 
   def transact
-    trans = InventTransaction.new(
-      )
-    trans.location_id = @movement.to_location_id
-    trans.item_id = @movement.item_id
-    trans.qty = @movement.qty
-    trans.status_receipt = 1
-    trans.status_issue = 0
-    trans.source_id = @movement.source_id
-    trans.source_type = @movement.source_type
+    transes = @source.invent_transactions
 
-    trans.save
-  end
+    if transes == [] then 
+      transes << @source.init_trans(InventTransaction.new)
+    end
+
+    transes.each do |trans|
+      @source.init_trans trans
+      set_statuses trans
+      trans.save
+    end
+  end 
+
 end
 
-class InventUpdateOnOrder < InventUpdate
-  def self.make mov
+class InventUpdateEstimated < InventUpdate
 
-    invent_update = InventUpdateOnOrder.new
-    invent_update.setup_movement mov
+  def self.transact source
+    update = InventUpdateEstimated.new
+    update.source = source
 
-    return invent_update
+    update.transact   
   end
 
-  def setup_movement mov
-    @movement = mov
+  def set_statuses trans
+    trans.status_receipt = (trans.qty > 0 ? 1 : 0)
+    trans.status_issue = (trans.qty < 0 ? 1 : 0)
   end
 
-  def transact
-    trans = InventTransaction.new(
-      )
-    trans.location_id = @movement.location_id
-    trans.item_id = @movement.item_id
-    trans.qty = @movement.qty * -1
-    trans.status_receipt = 0
-    trans.status_issue = 1
-    trans.source_id = @movement.source_id
-    trans.source_type = @movement.source_type
+end
 
-    trans.save
+class InventUpdatePosted < InventUpdate
+    
+  def self.transact source
+    update = InventUpdatePosted.new
+    update.source = source
+
+    update.transact   
+  end
+
+  def set_statuses trans
+    trans.status_receipt = (trans.qty > 0 ? 3 : 0)
+    trans.status_issue = (trans.qty < 0 ? 3 : 0)
   end
 end

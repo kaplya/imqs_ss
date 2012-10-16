@@ -1,6 +1,11 @@
 class InventOnhand < ActiveRecord::Base
-  attr_accessible :item_id, :location_id, :on_order_qty, :ordered_qty, :physical_qty, :posted_qty
+  attr_accessible :item_id, :dimension_id, :on_order_qty, :ordered_qty, :physical_qty, :posted_qty
+  
+  belongs_to :dimension, class_name: "InventDimension", foreign_key: "dimension_id"
 
+  validates :item_id, presence: true 
+  validates :item_id, presence: true 
+  validates :item_id, presence: true 
 
   def plus_transaction(trans)
   	# if we add the transaction we pass +1
@@ -15,7 +20,7 @@ class InventOnhand < ActiveRecord::Base
 
   def invoke_transaction(trans, direction)
   	# this holds the logic about how inventory transactions of different statuses reflect on inventory onhands
-  	# if there will be any new isuue or receipt statuses they should be here too
+  	# if there will be any new issue or receipt statuses they should be here too
   	qty = trans.qty * direction
 
   	if trans.status_issue == 0 then

@@ -1,15 +1,37 @@
 require 'test_helper'
 
 class InventOnhandTest < ActiveSupport::TestCase
+
+  fixtures :all
+
+
   # test "the truth" do
   #   assert true
   # end
+
+
+  test "negative qty" do
+  	onhand = InventOnhand.new(
+  		item_id: 1,
+  		dimension_id: 1)
+
+  	onhand.posted_qty = -1
+
+  	assert onhand.invalid?, "posted_qty should not be negative"
+  
+  	onhand.posted_qty = 0
+  	onhand.physical_qty = -1
+
+	assert onhand.invalid?, "physical_qty should not be negative"  	
+
+  end
+
   test "orderer qty on transaction update" do
 
-  	transacted_qty = 3.21
+	transacted_qty = 3.21
 
-  	trans = InventTransaction.new
-  	trans.location_id = 1
+	trans = InventTransaction.new
+	trans.dimension_id = 1
 	trans.item_id = 1  	
 	trans.status_receipt = 1
 	trans.status_issue = 0	

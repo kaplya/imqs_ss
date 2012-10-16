@@ -1,4 +1,6 @@
 Inventory::Application.routes.draw do
+  resources :invent_dimensions
+
   resources :invent_journal_lines
 
   resources :invent_journals

@@ -1,0 +1,33 @@
+<%= form_for(@invent_dimension) do |f| %>
+  <% if @invent_dimension.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invent_dimension.errors.count, "error") %> prohibited this invent_dimension from being saved:</h2>
+
+      <ul>
+      <% @invent_dimension.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :location_id %><br />
+    <%= f.number_field :location_id %>
+  </div>
+  <div class="field">
+    <%= f.label :batch_id %><br />
+    <%= f.number_field :batch_id %>
+  </div>
+  <div class="field">
+    <%= f.label :color_id %><br />
+    <%= f.number_field :color_id %>
+  </div>
+  <div class="field">
+    <%= f.label :size_id %><br />
+    <%= f.number_field :size_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

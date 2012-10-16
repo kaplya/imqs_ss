@@ -3,9 +3,10 @@ class CreateInventJournals < ActiveRecord::Migration
     create_table :invent_journals do |t|
       t.string :number
       t.string :description
-      t.integer :journal_type
-      t.integer :location_id
-      t.integer :to_location_id
+      t.string :type
+      t.integer :dimension_id
+      t.integer :to_dimension_id
+      t.boolean :posted, default: false, null: false
 
       t.timestamps
     end
