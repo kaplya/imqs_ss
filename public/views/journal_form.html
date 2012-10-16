@@ -6,7 +6,7 @@
 		<span>{{j.journal_type}}</span>
 		<span>{{j.location_id}}</span>
 		<span>{{j.to_location_id}}</span>
-		<a href class="lines-link" edit-link>Edit</a>
+		<a href class="lines-link" ng-click="j.mode='edit'">Edit</a>
 		<a href class="line-link" ng-click="destroy()">Delete</a> <br />
 		<a href class="lines-link" ng-click="j.show_lines=true" ng-hide="j.show_lines">Lines</a>
 	</div>
@@ -28,7 +28,7 @@
 		<div>
 			<input type="submit">
 			<span>or</span>
-			<a href cancel-link ng-click="cancel()">Cancel</a>
+			<a href ng-click="cancel()">Cancel</a>
 		</div>
 	</form>
 </div>

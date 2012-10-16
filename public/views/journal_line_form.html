@@ -5,7 +5,7 @@
 			<td>{{l.journal_number}}</td>
 			<td>{{l.item_id}}</td>
 			<td>{{l.qty}}</td>
-			<td><a href edit-link>edit</a> <span></span><a href ng-click="destroy()">x</a></td>
+			<td><a href ng-click="l.mode='edit'">edit</a> <span></span><a href ng-click="destroy()">x</a></td>
 		</tr>
 		<tr edit-form>
 			<td colspan=4>
@@ -22,7 +22,7 @@
 						<br />
 						<input type="submit">
 						<span>or</span>
-						<a href ng-click="cancel()" cancel-link>Cancel</a>
+						<a href ng-click="cancel()">Cancel</a>
 					</div>
 				</form>
 			</td>

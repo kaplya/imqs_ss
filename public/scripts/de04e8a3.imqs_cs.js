@@ -31,9 +31,9 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
         }
       ];
   
-      $httpBackend.whenGET('/data/invent_journals').respond(journals);
+      $httpBackend.whenGET('/invent_journals').respond(journals);
       
-      $httpBackend.whenPOST('/data/invent_journals').respond(function(method, url, data) {
+      $httpBackend.whenPOST('/invent_journals').respond(function(method, url, data) {
         var r = angular.fromJson(data)
         var e = {};
         if(r.number == null || r.number == '') {
@@ -59,13 +59,13 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
         return [200];
       });
       
-      $httpBackend.whenDELETE(/\/data\/invent_journals\/[1-9]/).respond(function(method, url, data, headers) {
+      $httpBackend.whenDELETE(/\/invent_journals\/[1-9]/).respond(function(method, url, data, headers) {
         var re = /([^\/]+)$/mg;
         console.log(re.exec(url));
         return [200];
       });
   
-      $httpBackend.whenPUT(/\/data\/invent_journals\/[1-9]/).respond(function(method, url, data, headers) {
+      $httpBackend.whenPUT(/\/invent_journals\/[1-9]/).respond(function(method, url, data, headers) {
         return [200];
       });
   
@@ -79,20 +79,20 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
         }
       ]
   
-      $httpBackend.whenGET('/data/invent_journal_lines?journal_id=1').respond(lines);
+      $httpBackend.whenGET('/invent_journal_lines?journal_id=1').respond(lines);
       
-      $httpBackend.whenPOST(/\/data\/invent_journal_lines/).respond(function(method, url, data,headers) {
+      $httpBackend.whenPOST(/\/invent_journal_lines/).respond(function(method, url, data,headers) {
         var d = angular.fromJson(data);
         d.id = 2;
         console.log(angular.toJson(d));
         return [200, angular.toJson(d)];
       });
   
-      $httpBackend.whenPUT(/\/data\/invent_journal_lines\/[1-9]/).respond(function(method, url, data, headers) {
+      $httpBackend.whenPUT(/\/invent_journal_lines\/[1-9]/).respond(function(method, url, data, headers) {
         return [200];
       });
   
-      $httpBackend.whenDELETE(/\/data\/invent_journal_lines\/[1-9]/).respond(function(method, url, data, headers) {
+      $httpBackend.whenDELETE(/\/invent_journal_lines\/[1-9]/).respond(function(method, url, data, headers) {
         return [200];
       });
   

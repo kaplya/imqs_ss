@@ -10,16 +10,6 @@ angular.module("ico",[])
   				$('[edit-form]', iElement).hide();
   			};
   			
-  			$('[edit-link]', iElement).on('click', function() {
-  				$('[show-form]', iElement).hide();
-  				$('[edit-form]', iElement).show();
-  			});
-  			
-        $('[cancel-link]', iElement).on('click', function() {
-  				$('[edit-form]', iElement).hide();  				
-  				$('[show-form]', iElement).show();
-  			});
-  			
         scope.$watch(iAttrs['icoForm'], function(newValue) {
           if(newValue == 'show') {
             $('[edit-form]', iElement).hide();
