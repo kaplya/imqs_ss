@@ -4,7 +4,6 @@ class InventJournal < ActiveRecord::Base
 
   validates :number, presence: true
   validates :dimension_id, presence: true
-  #set_inheritance_column :subtype
 
   def post
     self.transaction do 
@@ -19,17 +18,11 @@ class InventJournal < ActiveRecord::Base
       self.save
     end
   end
-
-  def trans_location qty
-    return self.location_id
-  end
-
-
 end
 
 class InventJournalTransfer < InventJournal
   has_many :lines, class_name: "InventJournalTransferLine", foreign_key: "journal_id"
-  validates :dimension_id, presence: true
+  validates :to_dimension_id, presence: true
 end
 
 
