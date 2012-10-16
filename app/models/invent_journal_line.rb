@@ -16,8 +16,6 @@ class InventJournalLine < ActiveRecord::Base
   @sign = 1
   attr_accessor :sign
 
-
-
   def init_trans trans
     trans.source_id = self.id
     trans.source_type = self.class.name

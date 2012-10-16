@@ -94,4 +94,5 @@ class InventJournalTransferLineTest < ActiveSupport::TestCase
     assert trans_receipt.status_receipt == 3, "status receipt should be 3 not #{trans_receipt.status_receipt}" 
     assert trans_receipt.qty == 12.0, "qty should be 12.0 not #{trans_receipt.qty}"
   end
+
 end
