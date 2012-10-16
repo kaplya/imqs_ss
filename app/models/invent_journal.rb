@@ -1,6 +1,9 @@
 class InventJournal < ActiveRecord::Base
   attr_accessible :description, :dimension_id, :number, :to_dimension_id, :type, :posted
   has_many :lines, class_name: "InventJournalLine", foreign_key: "journal_id"
+
+  validates :number, presence: true
+  validates :dimension_id, presence: true
   #set_inheritance_column :subtype
 
   def post
@@ -26,7 +29,7 @@ end
 
 class InventJournalTransfer < InventJournal
   has_many :lines, class_name: "InventJournalTransferLine", foreign_key: "journal_id"
-
+  validates :dimension_id, presence: true
 end
 
 

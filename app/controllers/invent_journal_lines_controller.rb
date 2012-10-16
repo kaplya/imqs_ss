@@ -17,7 +17,7 @@ class InventJournalLinesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @invent_journal_line }
+      format.json { render json: @invent_journal_line, include: :dimension }
     end
   end
 
