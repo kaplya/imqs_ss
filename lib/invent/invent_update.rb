@@ -15,7 +15,7 @@ class InventUpdate
       set_statuses trans
       trans.save
     end
-  end 
+  end
 
 end
 
@@ -32,7 +32,21 @@ class InventUpdateEstimated < InventUpdate
     trans.status_receipt = (trans.qty > 0 ? 1 : 0)
     trans.status_issue = (trans.qty < 0 ? 1 : 0)
   end
+end
 
+class InventUpdatePhysical < InventUpdate
+    
+  def self.transact source
+    update = InventUpdatePhysical.new
+    update.source = source
+
+    update.transact   
+  end
+
+  def set_statuses trans
+    trans.status_receipt = (trans.qty > 0 ? 2 : 0)
+    trans.status_issue = (trans.qty < 0 ? 2 : 0)
+  end
 end
 
 class InventUpdatePosted < InventUpdate
