@@ -27,6 +27,18 @@ class InventJournalLine < ActiveRecord::Base
     return trans
   end
 
+  def source_hash
+    ret = {}
+
+    ret[:trans_dimension_id] = self.trans_dimension_id
+    ret[:trans_item_id] = self.trans_item_id
+    ret[:trans_qty] = self.trans_qty
+    ret[:source_type] = self.class.name
+    ret[:source_id] = self.id
+
+    return ret
+  end
+
   def invent_transactions
     # teruns inventory transactions for journal line
     # in case of transfer journals only issue or receipt transactions returned (dependind on @sign)
@@ -78,16 +90,16 @@ class InventJournalTransferLine < InventJournalLine
 
   def transact_posted
     self.sign = -1
-    InventUpdatePosted.transact self
+    InventUpdatePosted.transact source_hash
     self.sign = 1
-    InventUpdatePosted.transact self
+    InventUpdatePosted.transact source_hash
   end  
 
   def transact_estimated
     self.sign = -1
-    InventUpdateEstimated.transact self
+    InventUpdateEstimated.transact source_hash
     self.sign = 1
-    InventUpdateEstimated.transact self
+    InventUpdateEstimated.transact source_hash
   end
 
 end
@@ -96,10 +108,10 @@ class InventJournalCountLine < InventJournalLine
   belongs_to :journal, class_name: "InventJournalCount", foreign_key: "journal_id"
 
   def transact_estimated
-    InventUpdateEstimated.transact self
+    InventUpdateEstimated.transact source_hash
   end
 
   def transact_posted
-    InventUpdatePosted.transact self
+    InventUpdatePosted.transact source_hash
   end
 end

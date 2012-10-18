@@ -47,6 +47,24 @@ class InventTransaction < ActiveRecord::Base
     return transes
   end
 
+  def self.abs_by_source(source_hash = {})
+    qty = source_hash[:trans_qty]
+    if qty > 0 then
+      transes = InventTransaction.where(
+        status_issue: 0,
+        source_id: source_hash[:source_id],
+        source_type: source_hash[:source_type])
+    elsif qty < 0 then
+      transes = InventTransaction.where(
+        status_receipt: 0,
+        source_id: source_hash[:source_id],
+        source_type: source_hash[:source_type])
+    else
+      transes = []
+    end
+    return transes
+  end
+
   def self.get_aggr_by_source_line(source_line) 
     if source_line.trans_qty > 0 then
       trans = InventTransaction.where(
