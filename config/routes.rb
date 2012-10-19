@@ -3,7 +3,9 @@ Inventory::Application.routes.draw do
 
   resources :invent_journal_lines
 
-  resources :invent_journals
+  resources :invent_journal_transfer_lines
+
+  resources :invent_transfer_journals
 
   resources :invent_onhands
 

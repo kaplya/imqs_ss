@@ -14,11 +14,11 @@ imqsCsApp
   .controller('JournalLineFormCtrl', ["$scope", "JournalLine", function($scope, JournalLine) {
     $scope.createOrUpdate = function() {
       var s = this;
+      s.l.errors = null;
       if(s.l.id == undefined)
         JournalLine.create(null, s.l, function(r) {
           $.extend(s.$parent.l, r);
           s.$parent.l.mode = "show";
-          s.l.errors = null;
         }, function(r) {
           s.l.errors = r.data;
         });
