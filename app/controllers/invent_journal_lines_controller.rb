@@ -41,7 +41,7 @@ class InventJournalLinesController < ApplicationController
   # POST /invent_journal_lines
   # POST /invent_journal_lines.json
   def create
-    @invent_journal_line = InventJournalLine.new(params[:invent_journal_line])
+     @invent_journal_line = InventJournal.find(params[:journal_id]).lines.build(params[:invent_journal_line]) 
 
     respond_to do |format|
       if @invent_journal_line.save
