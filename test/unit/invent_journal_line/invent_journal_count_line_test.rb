@@ -1,5 +1,7 @@
-require 'test_helper'
+module InventoryJournals
+	require 'test_helper'
 
-class InventJournalCountLineTest < ActiveSupport::TestCase
-  
+	class InventJournalCountLineTest < ActiveSupport::TestCase
+	  
+	end
 end

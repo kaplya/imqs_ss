@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Slip:</b>
+  <%= @packing_slip_line.slip_id %>
+</p>
+
+<p>
+  <b>Item:</b>
+  <%= @packing_slip_line.item_id %>
+</p>
+
+<p>
+  <b>Dimension:</b>
+  <%= @packing_slip_line.dimension_id %>
+</p>
+
+<p>
+  <b>Qty:</b>
+  <%= @packing_slip_line.qty %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @packing_slip_line.price %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @packing_slip_line.amount %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @packing_slip_line.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_packing_slip_line_path(@packing_slip_line) %> |
+<%= link_to 'Back', packing_slip_lines_path %>

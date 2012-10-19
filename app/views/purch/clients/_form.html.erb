@@ -1,0 +1,21 @@
+<%= form_for(@purch_client) do |f| %>
+  <% if @purch_client.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purch_client.errors.count, "error") %> prohibited this purch_client from being saved:</h2>
+
+      <ul>
+      <% @purch_client.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

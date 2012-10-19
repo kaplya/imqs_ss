@@ -1,0 +1,31 @@
+<h1>Listing purch_lines</h1>
+
+<table>
+  <tr>
+    <th>Purch</th>
+    <th>Item</th>
+    <th>Dimension</th>
+    <th>Qty</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purch_lines.each do |purch_line| %>
+  <tr>
+    <td><%= purch_line.purch_id %></td>
+    <td><%= purch_line.item_id %></td>
+    <td><%= purch_line.dimension_id %></td>
+    <td><%= purch_line.qty %></td>
+    <td><%= purch_line.type %></td>
+    <td><%= link_to 'Show', purch_line %></td>
+    <td><%= link_to 'Edit', edit_purch_line_path(purch_line) %></td>
+    <td><%= link_to 'Destroy', purch_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purch line', new_purch_line_path %>

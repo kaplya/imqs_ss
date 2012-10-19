@@ -1,0 +1,23 @@
+<h1>Listing purch_clients</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purch_clients.each do |purch_client| %>
+  <tr>
+    <td><%= purch_client.name %></td>
+    <td><%= link_to 'Show', purch_client %></td>
+    <td><%= link_to 'Edit', edit_purch_client_path(purch_client) %></td>
+    <td><%= link_to 'Destroy', purch_client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Client', new_purch_client_path %>

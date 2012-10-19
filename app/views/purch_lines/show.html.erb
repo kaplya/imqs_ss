@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Purch:</b>
+  <%= @purch_line.purch_id %>
+</p>
+
+<p>
+  <b>Item:</b>
+  <%= @purch_line.item_id %>
+</p>
+
+<p>
+  <b>Dimension:</b>
+  <%= @purch_line.dimension_id %>
+</p>
+
+<p>
+  <b>Qty:</b>
+  <%= @purch_line.qty %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @purch_line.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_purch_line_path(@purch_line) %> |
+<%= link_to 'Back', purch_lines_path %>

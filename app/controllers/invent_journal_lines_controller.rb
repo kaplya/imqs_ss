@@ -2,7 +2,7 @@ class InventJournalLinesController < ApplicationController
   # GET /invent_journal_lines
   # GET /invent_journal_lines.json
   def index
-    @invent_journal_lines = InventJournalLine.all
+    @invent_journal_lines = ::InventoryJournals::InventJournalLine.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class InventJournalLinesController < ApplicationController
   # GET /invent_journal_lines/1
   # GET /invent_journal_lines/1.json
   def show
-    @invent_journal_line = InventJournalLine.find(params[:id])
+    @invent_journal_line = ::InventoryJournals::InventJournalLine.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class InventJournalLinesController < ApplicationController
   # GET /invent_journal_lines/new
   # GET /invent_journal_lines/new.json
   def new
-    @invent_journal_line = InventJournalLine.new
+    @invent_journal_line = ::InventoryJournals::InventJournalLine.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class InventJournalLinesController < ApplicationController
 
   # GET /invent_journal_lines/1/edit
   def edit
-    @invent_journal_line = InventJournalLine.find(params[:id])
+    @invent_journal_line = ::InventoryJournals::InventJournalLine.find(params[:id])
   end
 
   # POST /invent_journal_lines
   # POST /invent_journal_lines.json
   def create
-    @invent_journal_line = InventJournalLine.new(params[:invent_journal_line])
+    @invent_journal_line = ::InventoryJournals::InventJournalLine.new(params[:invent_journal_line])
 
     respond_to do |format|
       if @invent_journal_line.save
@@ -56,7 +56,7 @@ class InventJournalLinesController < ApplicationController
   # PUT /invent_journal_lines/1
   # PUT /invent_journal_lines/1.json
   def update
-    @invent_journal_line = InventJournalLine.find(params[:id])
+    @invent_journal_line = ::InventoryJournals::InventJournalLine.find(params[:id])
 
     respond_to do |format|
       if @invent_journal_line.update_attributes(params[:invent_journal_line])
@@ -72,7 +72,7 @@ class InventJournalLinesController < ApplicationController
   # DELETE /invent_journal_lines/1
   # DELETE /invent_journal_lines/1.json
   def destroy
-    @invent_journal_line = InventJournalLine.find(params[:id])
+    @invent_journal_line = ::InventoryJournals::InventJournalLine.find(params[:id])
     @invent_journal_line.destroy
 
     respond_to do |format|

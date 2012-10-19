@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Purch:</b>
+  <%= @packing_slip.purch_id %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @packing_slip.number %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @packing_slip.description %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @packing_slip.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_packing_slip_path(@packing_slip) %> |
+<%= link_to 'Back', packing_slips_path %>

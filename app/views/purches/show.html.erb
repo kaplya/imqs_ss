@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Number:</b>
+  <%= @purch.number %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @purch.description %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @purch.type %>
+</p>
+
+<p>
+  <b>Dimension:</b>
+  <%= @purch.dimension_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_purch_path(@purch) %> |
+<%= link_to 'Back', purches_path %>

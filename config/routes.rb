@@ -1,4 +1,22 @@
 Inventory::Application.routes.draw do
+  namespace :purch do 
+
+    resources :clients 
+
+    resources :packing_slip_lines
+
+    resources :packing_slips
+
+    resources :order_lines
+
+    resources :orders
+
+    resources :purch_lines
+
+    resources :purches
+
+    end
+
   resources :invent_dimensions
 
   resources :invent_journal_lines

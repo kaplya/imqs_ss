@@ -1,7 +1,9 @@
-require 'test_helper'
+module InventoryBasic
+	require 'test_helper'
 
-class InventTransactionTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+	class InventTransactionTest < ActiveSupport::TestCase
+	  # test "the truth" do
+	  #   assert true
+	  # end
+	end
 end

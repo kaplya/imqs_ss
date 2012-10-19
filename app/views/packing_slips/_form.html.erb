@@ -1,0 +1,33 @@
+<%= form_for(@packing_slip) do |f| %>
+  <% if @packing_slip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@packing_slip.errors.count, "error") %> prohibited this packing_slip from being saved:</h2>
+
+      <ul>
+      <% @packing_slip.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :purch_id %><br />
+    <%= f.number_field :purch_id %>
+  </div>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.text_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

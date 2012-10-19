@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  location_id: 1
-  batch_id: 1
-  color_id: 1
-  size_id: 1
+# one:
+#   location_id: 1
+#   batch_id: 1
+#   color_id: 1
+#   size_id: 1
 
-two:
-  location_id: 2
-  batch_id: 1
-  color_id: 1
-  size_id: 1
+# two:
+#   location_id: 2
+#   batch_id: 1
+#   color_id: 1
+#   size_id: 1

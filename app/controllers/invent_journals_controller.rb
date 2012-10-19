@@ -2,7 +2,7 @@ class InventJournalsController < ApplicationController
   # GET /invent_journals
   # GET /invent_journals.json
   def index
-    @invent_journals = InventJournal.all
+    @invent_journals = ::InventoryJournals::InventJournal.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class InventJournalsController < ApplicationController
   # GET /invent_journals/1
   # GET /invent_journals/1.json
   def show
-    @invent_journal = InventJournal.find(params[:id])
+    @invent_journal = ::InventoryJournals::InventJournal.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class InventJournalsController < ApplicationController
   # GET /invent_journals/new
   # GET /invent_journals/new.json
   def new
-    @invent_journal = InventJournal.new
+    @invent_journal = ::InventoryJournals::InventJournal.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class InventJournalsController < ApplicationController
 
   # GET /invent_journals/1/edit
   def edit
-    @invent_journal = InventJournal.find(params[:id])
+    @invent_journal = ::InventoryJournals::InventJournal.find(params[:id])
   end
 
   # POST /invent_journals
   # POST /invent_journals.json
   def create
-    @invent_journal = InventJournal.new(params[:invent_journal])
+    @invent_journal = ::InventoryJournals::InventJournal.new(params[:invent_journal])
 
     respond_to do |format|
       if @invent_journal.save
@@ -56,7 +56,7 @@ class InventJournalsController < ApplicationController
   # PUT /invent_journals/1
   # PUT /invent_journals/1.json
   def update
-    @invent_journal = InventJournal.find(params[:id])
+    @invent_journal = ::InventoryJournals::InventJournal.find(params[:id])
 
     respond_to do |format|
       if @invent_journal.update_attributes(params[:invent_journal])
@@ -72,7 +72,7 @@ class InventJournalsController < ApplicationController
   # DELETE /invent_journals/1
   # DELETE /invent_journals/1.json
   def destroy
-    @invent_journal = InventJournal.find(params[:id])
+    @invent_journal = ::InventoryJournals::InventJournal.find(params[:id])
     @invent_journal.destroy
 
     respond_to do |format|

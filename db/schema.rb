@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121016104735) do
+ActiveRecord::Schema.define(:version => 20121018100231) do
 
   create_table "invent_dimensions", :force => true do |t|
     t.integer  "location_id"
@@ -65,6 +65,71 @@ ActiveRecord::Schema.define(:version => 20121016104735) do
     t.decimal  "qty",            :default => 0.0, :null => false
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+  end
+
+  create_table "order_lines", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "item_id"
+    t.integer  "dimension_id"
+    t.decimal  "qty"
+    t.decimal  "price"
+    t.decimal  "amount"
+    t.string   "type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "orders", :force => true do |t|
+    t.integer  "purch_id"
+    t.string   "number"
+    t.string   "description"
+    t.string   "type"
+    t.boolean  "posted",      :default => false, :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "packing_slip_lines", :force => true do |t|
+    t.integer  "slip_id"
+    t.integer  "item_id"
+    t.integer  "dimension_id"
+    t.decimal  "qty"
+    t.decimal  "price"
+    t.decimal  "amount"
+    t.string   "type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "packing_slips", :force => true do |t|
+    t.integer  "purch_id"
+    t.string   "number"
+    t.string   "description"
+    t.string   "type"
+    t.boolean  "posted",      :default => false, :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "purch_lines", :force => true do |t|
+    t.integer  "purch_id"
+    t.integer  "item_id"
+    t.integer  "dimension_id"
+    t.decimal  "qty"
+    t.string   "type"
+    t.decimal  "price"
+    t.decimal  "amount"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "purches", :force => true do |t|
+    t.string   "number"
+    t.string   "description"
+    t.string   "type"
+    t.integer  "dimension_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end

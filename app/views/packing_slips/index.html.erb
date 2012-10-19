@@ -1,0 +1,29 @@
+<h1>Listing packing_slips</h1>
+
+<table>
+  <tr>
+    <th>Purch</th>
+    <th>Number</th>
+    <th>Description</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @packing_slips.each do |packing_slip| %>
+  <tr>
+    <td><%= packing_slip.purch_id %></td>
+    <td><%= packing_slip.number %></td>
+    <td><%= packing_slip.description %></td>
+    <td><%= packing_slip.type %></td>
+    <td><%= link_to 'Show', packing_slip %></td>
+    <td><%= link_to 'Edit', edit_packing_slip_path(packing_slip) %></td>
+    <td><%= link_to 'Destroy', packing_slip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Packing slip', new_packing_slip_path %>

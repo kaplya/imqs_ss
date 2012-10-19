@@ -1,0 +1,29 @@
+<h1>Listing purches</h1>
+
+<table>
+  <tr>
+    <th>Number</th>
+    <th>Description</th>
+    <th>Type</th>
+    <th>Dimension</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purches.each do |purch| %>
+  <tr>
+    <td><%= purch.number %></td>
+    <td><%= purch.description %></td>
+    <td><%= purch.type %></td>
+    <td><%= purch.dimension_id %></td>
+    <td><%= link_to 'Show', purch %></td>
+    <td><%= link_to 'Edit', edit_purch_path(purch) %></td>
+    <td><%= link_to 'Destroy', purch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purch', new_purch_path %>

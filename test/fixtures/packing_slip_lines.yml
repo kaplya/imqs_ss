@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  slip_id: 1
+  item_id: 1
+  dimension_id: 1
+  qty: 9.99
+  price: 9.99
+  amount: 9.99
+  type: 
+
+two:
+  slip_id: 1
+  item_id: 1
+  dimension_id: 1
+  qty: 9.99
+  price: 9.99
+  amount: 9.99
+  type: 
