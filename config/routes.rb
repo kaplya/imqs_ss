@@ -7,6 +7,8 @@ Inventory::Application.routes.draw do
 
   resources :invent_transfer_journals
 
+  resources :invent_journals
+
   resources :invent_onhands
 
   resources :invent_transactions
