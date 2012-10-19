@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Time: Tue Oct 16 2012 18:14:08 GMT+0400 (Ìîñêîâñêîå âðåìÿ (çèìà))
+# Time: Fri Oct 19 2012 10:21:27 GMT+0400 (Ìîñêîâñêîå âðåìÿ (çèìà))
 # This manifest was created by confess.js, http://github.com/jamesgpearce/confess
 #
 # Retrieved URL: http://localhost:3501/#/
@@ -21,7 +21,7 @@ CACHE MANIFEST
 #  configFile: D:\UserProfiles\vvdovin\AppData\Roaming\npm\node_modules\yeoman\lib\support\confess.json
 
 CACHE:
-styles/ccc829e2.main.css
+styles/b6354add.main.css
 
 NETWORK:
 *

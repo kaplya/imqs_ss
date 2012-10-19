@@ -5,15 +5,11 @@ imqsCsApp
     return $resource('/invent_journal_lines/:id/:action');
   }])
   .controller('JournalLinesCtrl', ["$scope", "JournalLine", function($scope, JournalLine) {
-    if($scope.j.id != undefined)
-      $scope.j.lines = JournalLine.query({journal_id: $scope.j.id});
-    else
-    if($scope.j.lines == undefined)
-      $scope.j.lines = [];
-    
+    $scope.j.lines = [];
     $scope.new = function() {
       $scope.j.lines = [{ journal_id: $scope.j.id, mode: "edit" }].concat($scope.j.lines);
-    };        
+    };
+
   }])
   .controller('JournalLineFormCtrl', ["$scope", "JournalLine", function($scope, JournalLine) {
     $scope.createOrUpdate = function() {
@@ -22,6 +18,9 @@ imqsCsApp
         JournalLine.create(null, s.l, function(r) {
           $.extend(s.$parent.l, r);
           s.$parent.l.mode = "show";
+          s.l.errors = null;
+        }, function(r) {
+          s.l.errors = r.data;
         });
       else
         JournalLine.update({ id: s.l.id }, s.l, function(r) {

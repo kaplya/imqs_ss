@@ -1,11 +1,15 @@
+<!-- <a href ng-click="j.mode='loading'">loading</a>
+<a href ng-click="j.mode='show'">show</a>
+<a href ng-click="j.mode='edit'">edit</a>
+ -->
 <div  ng-controller="JournalCtrl" ico-form="j.mode">
 	<div show-form>
 		<span>{{j.id}}</span>
 		<span>{{j.number}}</span>
 		<span>{{j.description}}</span>
-		<span>{{j.journal_type}}</span>
+		<span>{{j.type}}</span>
 		<span>{{j.location_id}}</span>
-		<span>{{j.to_location_id}}</span>
+		<span>{{j.dimension_id}}</span>
 		<a href class="lines-link" ng-click="j.mode='edit'">Edit</a>
 		<a href class="line-link" ng-click="destroy()">Delete</a> <br />
 		<a href class="lines-link" ng-click="j.show_lines=true" ng-hide="j.show_lines">Lines</a>
@@ -16,9 +20,9 @@
 			<tr style="vertical-align:top;">
 				<td ico-input="j.number">Number</td>
 				<td ico-input="j.description">Description</td>
-				<td ico-input="j.journal_type">journal_type</td>
-				<td ico-input="j.dimension_id">location_id</td>
-				<td ico-input="j.to_location_id">to_location_id</td>
+				<td ico-input="j.type">type</td>
+				<td ico-input="j.location_id">location_id</td>
+				<td ico-input="j.dimension_id">dimension_id</td>
 			</tr>
 			<tr>
 				<td ico-error="j.errors.main" colspan=5>

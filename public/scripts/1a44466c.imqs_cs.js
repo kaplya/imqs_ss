@@ -34,6 +34,7 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
       $httpBackend.whenGET('/invent_journals').respond(journals);
       
       $httpBackend.whenPOST('/invent_journals').respond(function(method, url, data) {
+        
         var r = angular.fromJson(data)
         var e = {};
         if(r.number == null || r.number == '') {
@@ -49,7 +50,11 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
         if(r.description != r.number) {
           e['main'] = ["description should be equal number"];
         }
-  
+
+        // var ms = 5000;
+        // ms += new Date().getTime();
+        // while (new Date() < ms){}
+
         if(!$.isEmptyObject(e))
           return [400, e];
         
@@ -57,6 +62,7 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
         r.class = "";
         journals.push(angular.fromJson(r));
         return [200];
+
       });
       
       $httpBackend.whenDELETE(/\/invent_journals\/[1-9]/).respond(function(method, url, data, headers) {
@@ -100,3 +106,9 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
       $httpBackend.whenGET(/^views\//).passThrough();
   
     }]);
+
+jQuery(function() {
+  // var spinner = new Spinner().spin($('body'));
+  // var spinner = new Spinner().spin();
+  // $('body').append(spinner.el);
+})

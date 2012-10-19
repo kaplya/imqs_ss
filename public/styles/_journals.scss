@@ -1,3 +1,10 @@
+.loading {
+	background-color: rgba(255, 0, 0, 0.5);
+	z-index: 999;
+	opacity: 0.5;
+  	filter: alpha(opacity=50);
+}
+
 .journal {
 	border: 1px black solid;
 	margin: 2px 6px 2px 6px;
