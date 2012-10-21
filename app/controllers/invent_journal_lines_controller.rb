@@ -1,8 +1,9 @@
 class InventJournalLinesController < ApplicationController
+  # TODO remove sleeps
   # GET /invent_journal_lines
   # GET /invent_journal_lines.json
   def index
-    
+    sleep 1
     @invent_journal_lines = InventJournalLine.where(:journal_id => params[:journal_id])
 
     respond_to do |format|

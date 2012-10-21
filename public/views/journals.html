@@ -1,15 +1,12 @@
-
-<div ng-controller="JournalsContentCtrl">
+<div ico-loading="loading" ng-controller="JournalsContentCtrl">
+<!-- 	<a href ng-click="loading='true'">loading</a>
+	<a href ng-click="loading='false'">show</a>
+ -->	
 	<a href ng-click="new()">New journal</a>
-	<div ng-repeat="j in journals" class="journal">
+	<div ng-repeat="j in journals">
 		
-		<div ng-include="'views/journal_form.html'" ng-class="j.class"></div>
+		<div ng-include="'views/journal_form.html'"></div>
+		<!-- <a href ng-click="loading='true'">loading</a> -->
 
-		<div class="lines" ng-controller="JournalLinesCtrl" ng-show="j.show_lines">
-			<a href ng-click="new()">Add</a>
-			<span>or</span>
-			<a href ng-click="j.show_lines=false">Hide</a>
-			<div ng-repeat="l in j.lines" ng-include="'views/journal_line_form.html'"></div>
-		</div>
 	</div>
-</div>
+</div> 

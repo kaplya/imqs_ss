@@ -1,11 +1,13 @@
-<table ng-controller="JournalLineFormCtrl" ico-form="l.mode">
+<!-- <a href ng-click="l.mode='loading'">loading</a>
+<a href ng-click="l.mode='show'">show</a> -->
+<table ng-controller="JournalLineFormCtrl" ico-form="l.mode" ico-loading>
 	<tbody>
 		<tr show-form>
 			<td>{{l.id}}</td>
 			<td>{{l.journal_id}}</td>
 			<td>{{l.item_id}}</td>
 			<td>{{l.dimension_id}}</td>
-			<td>{{l.to_dimenstion_id}}</td>
+			<td>{{l.to_dimension_id}}</td>
 			<td>{{l.qty}}</td>
 			<td>{{l.type}}</td>
 			<td><a href ng-click="l.mode='edit'">edit</a> <span></span><a href ng-click="destroy()">x</a></td>
@@ -15,9 +17,8 @@
 				<form ng-submit="createOrUpdate()">
 					<div ico-input="l.item_id">item_id</div>
 					<div ico-input="l.dimension_id">dimension_id</div>
-					<div ico-input="l.to_dimension_id">to_dimenstion_id</div>
+					<div ico-input="l.to_dimension_id">to_dimension_id</div>
 					<div ico-input="l.qty">qty</div>
-					<div ico-input="l.type">type</div>
 					<div ico-error="l.errors.main"></div>
 					<div>
 						<br />
@@ -30,6 +31,3 @@
 		</tr>
 	</tbody>
 </table>
-
-
-

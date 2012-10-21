@@ -43,6 +43,7 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
             "the third error"];
   
         }
+
         if(r.description == null || r.description == '') {
           e['description'] = ["can't be null"];
         }
@@ -51,15 +52,12 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
           e['main'] = ["description should be equal number"];
         }
 
-        // var ms = 5000;
-        // ms += new Date().getTime();
-        // while (new Date() < ms){}
-
         if(!$.isEmptyObject(e))
           return [400, e];
         
         r.mode = "";
         r.class = "";
+        r.id = 2;
         journals.push(angular.fromJson(r));
         return [200];
 
@@ -67,7 +65,6 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
       
       $httpBackend.whenDELETE(/\/invent_journals\/[1-9]/).respond(function(method, url, data, headers) {
         var re = /([^\/]+)$/mg;
-        console.log(re.exec(url));
         return [200];
       });
   
@@ -76,21 +73,45 @@ var imqsCsApp = angular.module('imqsCsApp', ['ngResource', 'ico'])
       });
   
       // LINES
-      var lines = [
-        { id: 1,
-          journal_id: 1,
-          journal_number: '0001',
-          item_id: 1,
-          qty: 10
-        }
-      ]
+      var lines = { 
+        1: [
+          { id: 1,
+            journal_id: 1,
+            item_id: 1,
+            dimension_id: 1,
+            to_dimension_id: 2,
+            qty: 15
+          }
+        ] 
+      };
   
-      $httpBackend.whenGET('/invent_journal_lines?journal_id=1').respond(lines);
+      $httpBackend.whenGET(/^\/invent_journal_lines/).respond(function(method, url, data, headers) {
+        var journal_id = /[\\?&]journal_id=([^&#]*)/.exec(url)[1];
+        return [200, lines[journal_id]];
+      });
       
-      $httpBackend.whenPOST(/\/invent_journal_lines/).respond(function(method, url, data,headers) {
-        var d = angular.fromJson(data);
+      $httpBackend.whenPOST(/\/invent_journal_lines/).respond(function(method, url, data, headers) {
+        var d = angular.fromJson(data);        
         d.id = 2;
-        console.log(angular.toJson(d));
+        d.type = "test type";
+        d.mode = null;
+        console.log(d.journal_id);
+
+        var e = {};
+        if(d.dimension_id == d.to_dimension_id)
+          e.main = ["dimensions should be different"];
+
+        if(d.item_id == null || d.item_id == "")
+          e.item_id = ["shouldn't be blank"];
+
+        if(!$.isEmptyObject(e))
+          return [400, e];
+
+        if(!lines[d.journal_id])
+          lines[d.journal_id] = [];
+        
+        lines[d.journal_id].push(d);
+
         return [200, angular.toJson(d)];
       });
   

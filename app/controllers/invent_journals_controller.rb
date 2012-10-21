@@ -1,7 +1,10 @@
 class InventJournalsController < ApplicationController
+  # TODO Del sleeps
+
   # GET /invent_journals
   # GET /invent_journals.json
   def index
+    sleep 1
     @invent_journals = InventJournal.all
 
     respond_to do |format|
@@ -40,6 +43,7 @@ class InventJournalsController < ApplicationController
   # POST /invent_journals
   # POST /invent_journals.json
   def create
+    sleep 1
     @invent_journal = InventJournal.new(params[:invent_journal])
 
     respond_to do |format|
@@ -56,6 +60,7 @@ class InventJournalsController < ApplicationController
   # PUT /invent_journals/1
   # PUT /invent_journals/1.json
   def update
+    sleep 1
     @invent_journal = InventJournal.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +77,7 @@ class InventJournalsController < ApplicationController
   # DELETE /invent_journals/1
   # DELETE /invent_journals/1.json
   def destroy
+    sleep 1
     @invent_journal = InventJournal.find(params[:id])
     @invent_journal.destroy
 
